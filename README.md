@@ -4,7 +4,7 @@ The purpose of this project is to dynamically add blog posts to my static websit
 I'm first going to implement this in python, and then once I get more familiar with rust, I will redo it in rust.
 
 
-Blogenerator will work like this:
+**Blogenerator will work like this:**
 
 1. I write a blog article in markdown.
 2. Script reads the markdown file and converts it to html depending on a specified html template file I made (start off hardcoded, then I can make this dynamic)
@@ -31,7 +31,11 @@ All generated posts are to be hidden from AI crawlers, and google search results
 ## Future Features
 - Japanese localisation
 
-# Notes to self (useful things)
+# Notes to self 
+## Todo
+- [ ] Understand how fonts work in tailwind, and load them locally/in the most efficient way
+
+## Useful things
 https://regex101.com/
 
 
