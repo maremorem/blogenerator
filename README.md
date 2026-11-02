@@ -12,6 +12,9 @@ Blogenerator will work like this:
 
 ---
 
+It will run on a command line interface on both windows and linux.
+
+
 ## Requirements
 md posts can contain front matter attributes that show up on the final page. These include:
 - date written
@@ -20,5 +23,10 @@ md posts can contain front matter attributes that show up on the final page. The
 All generated posts are to be hidden from AI crawlers, and google search results where possible. There will be defences in place to block crawlers that misbehave.
     RATIONALE: The contents of some of my blog posts might be personal stories that I want to share with my fans, but keep out of direct data harvesting as much as possible.
 - robots.txt will disallow the /blog directory
-- all blog post pages contain the noindex attribute
-- 
+- all blog post pages contain the noindex attribute by default. This can be optionally disabled in the script's dialog.
+- I will enable the 'AI labyrinth' setting in cloudflare
+
+
+
+## Future Features
+- Japanese localisation
