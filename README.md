@@ -34,6 +34,8 @@ All generated posts are to be hidden from AI crawlers, and google search results
 # Notes to self 
 ## Todo
 - [ ] Understand how fonts work in tailwind, and load them locally/in the most efficient way
+- [ ] Finish the blog template. Use obsidian templater syntax as inspiration
+- [ ] Implement the blogenerator functionality in main.py
 
 ## Useful things
 https://regex101.com/
