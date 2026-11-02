@@ -1,0 +1,27 @@
+const navbarTemplate = document.createElement('template');
+navbarTemplate.innerHTML = `
+<header class="flex flex-col items-center gap-2.5 tracking-wide sm:gap-5">
+    <!-- Page navigation -->
+    <nav class="z-20 flex gap-2 w-full justify-center">
+    	<span class="block text-[20px] font-mono">
+    		<a href="/" class="transition-opacity hover:opacity-40 opacity-60">Home</a> ∿
+    		<a href="/music.html" class="transition-opacity hover:opacity-80 opacity-100 underline">Music</a> ∿
+    		<a href="/about.html" class="transition-opacity hover:opacity-40 opacity-60">About</a>
+    	</span>
+    </nav>
+</header>
+`
+
+class Navbar extends HTMLElement {
+    constructor() {
+        super();
+        // const shadowRoot = this.attachShadow({ mode: 'open' });
+    }
+
+    connectedCallback() {
+        const shadowRoot = this.attachShadow({ mode: 'open' });
+        shadowRoot.appendChild(navbarTemplate.content);
+    }
+}
+
+customElements.define('lw-navbar', Navbar)

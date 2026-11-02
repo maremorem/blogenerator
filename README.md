@@ -30,3 +30,13 @@ All generated posts are to be hidden from AI crawlers, and google search results
 
 ## Future Features
 - Japanese localisation
+
+# Notes to self (useful things)
+https://regex101.com/
+
+
+https://developer.mozilla.org/en-US/docs/Web/API/Web_components
+https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_templates_and_slots
+
+Don't repeat yourself:
+https://dev.to/anuradha9712/create-reusable-web-components-in-html-1llc

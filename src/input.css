@@ -1,0 +1,84 @@
+@import "tailwindcss";
+
+html,
+body {
+    background-color: #0d0d0d;
+    color: aliceblue;
+}
+
+/* @font-face {
+  font-family: 'mono';
+  src: url('/src/fonts/NotoSansMono-VariableFont_wdth\,wght.ttf') format('truetype');
+} */
+
+
+#iconThree p span:nth-child(1) {
+    animation: iconThreeLoading 2s ease-in infinite;
+}
+
+#iconThree p span:nth-child(2) {
+    animation: iconThreeLoading 2s ease-in 0.2s infinite;
+}
+
+#iconThree p span:nth-child(3) {
+    animation: iconThreeLoading 2s ease-in 0.4s infinite;
+}
+
+#iconThree p span:nth-child(4) {
+    animation: iconThreeLoading 2s ease-in 0.6s infinite;
+}
+
+#iconThree p span:nth-child(5) {
+    animation: iconThreeLoading 2s ease-in 0.8s infinite;
+}
+
+#iconThree p span:nth-child(6) {
+    animation: iconThreeLoading 2s ease-in 1.0s infinite;
+}
+
+#iconThree p span:last-child {
+    animation: iconThreeLoading 2s ease-in 1.4s infinite;
+}
+
+@keyframes iconThreeLoading {
+    50% {
+        /* end */
+        font-weight: bold;
+        font-variant: small-caps;
+    }
+
+    100% {
+        /* start */
+        font-weight: bold;
+        font-variant: normal;
+    }
+}
+
+.bandcampfollow {
+    padding: 10px 0 11px 2px;
+    margin: 11px 0 11px 0;
+    border-radius: 3px;
+    font-weight: 600;
+    color: #FFFFFF;
+    width: 270px;
+    border: none;
+}
+
+
+
+@keyframes blink {
+
+    0%,
+    59% {
+        opacity: 1;
+    }
+
+    60%,
+    100% {
+        opacity: 0;
+    }
+}
+
+.cursor {
+    animation: blink 1.5s infinite;
+}
