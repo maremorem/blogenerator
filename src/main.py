@@ -14,11 +14,9 @@ def userinput(message: str, choices: List[str]=[], pattern: str=""):
     value = input()
     while True:
         if value in choices:
-            print("choices match!")
             return value
         else:
             if pattern != "" and re.match(pattern, value):
-                print("re match!")
                 return value
             elif value == "help":
                 print(helpmessage)
@@ -34,34 +32,15 @@ def userinput(message: str, choices: List[str]=[], pattern: str=""):
 # choice = userinput("EXAMPLE Please enter a value of a, b, or c. OR enter a filename ending with .md:", ["a", "b", "c"], r".*\.md$")
 # print(f"Returned value: {choice}")
 
-print("Welcome to Blogenerator v0.1!\nPlease enter your new blog post. Format: <filename.md>")
+print("Welcome to Blogenerator v0.1!")
+filename = userinput("Please enter the name of your new blog post. Format: <filename.md>", [], r".*\.md$")
+try:
+   blogfile = open(filename)
+except:
+    print("File failed to open. Exiting..")
+    sys.exit()
 
-
-
-
-
-
-# while True: #need to fix this loop still. It doesn't let you ctrl+c or quit.
-#     try:
-#         blogfile = input()
-
-#         if blogfile == "help":
-#             print(helpmessage)
-#             pass
-#         elif blogfile == "quit":
-#             sys.exit() # why doesn't this work??
-#         else:
-#             pass
-
-#         pattern = r".*\.md$" # Pattern: A string STARTING with any character (.*) and ENDING in the literal .md (\.md$)
-#         if re.match(pattern, blogfile):
-#             break 
-#         else:
-#             raise TypeError("Incorrect format")
-#     except:
-#         print("Please try again! Format: <filename>.md")
-
-# print(f"Successfully loaded {blogfile} for conversion.")
+print(f"Successfully loaded {filename} for conversion.")
 # print("Current template file: template.html\n   -> Do you want to choose a new template file? (y/n)")
 # # another input chooser goes here
 # input()
