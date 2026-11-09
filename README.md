@@ -10,13 +10,13 @@ Creation and modification dates must be specified in ISO format. For example:
 - The timestamp variable is currently set to Sydney Australia. This means that the offset for the current time of year in Sydney will be appended to the above datetime to comply with ISO 8601, which is required for opengraph meta creation info.
 
 Your blog post should contain the following properties:
-title
-description
-created
-lastmod\*
-tags
-cover (path to an image)
-lang
+- title
+- description
+- created
+- lastmod\*
+- tags
+- cover (path to an image)
+- lang
 
 
 

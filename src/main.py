@@ -1,3 +1,4 @@
+import os
 from datetime import datetime
 from zoneinfo import ZoneInfo
 import re
@@ -61,8 +62,8 @@ def loadfile(loadfilename):
 
 # LOAD THE BLOG FILE AND TEMPLATE FILE
 print("Welcome to Blogenerator v0.1!")
-# filename = userinput("Please enter the name of your new blog post. Example: <filename.md>", [], r".*\.md$", "mycoolblog.md")
-filename = "blogtest.md"
+filename = userinput("Please enter the filename of your new blog post. Example: <filename.md>", [], r".*\.md$", "mycoolblog.md")
+# filename = "blogtest.md"
 try:
     with open(filename, "r") as loaded:
         blogfile = loaded.read()
@@ -117,14 +118,15 @@ for i in range(count + 1, len(blogfilelist)):
         blogContent = blogContent +"\n"+ blogfilelist[i]
 
 
-print(f"Metadata: {metadata}")
+# print(f"Metadata: {metadata}")
 
 # PARSE AND SUBSTITE ALL THE METADATA THINGIES BASED ON FRONTMATTER ENTRIES
 result = templatefile
 for key, value in metadata.items():
     # print(key, value)
+    if key == "title":
+        resultfilename = value + ".html"
     if key == "tags":
-        print(value)
         for tag in value:
             pattern = r"\{\{%%tags%%\}\}"
             metapattern = r"\{\{%%metatags%%\}\}"
@@ -137,34 +139,39 @@ for key, value in metadata.items():
                 result = re.sub(metapattern, "<meta property=\"article:tag\" content=\""+tag+"\">", result) # last metatag
     elif key == "created":
         timestamp = datetime.fromisoformat(str(value)).replace(tzinfo=ZoneInfo("Australia/Sydney"))
-        print("Timestamp: " + str(timestamp))
-
         pattern = r"\{\{%%created%%\}\}"
         metapattern = r"\{\{%%metacreated%%\}\}"
 
         timestampmessage = f"{timestamp.day} {timestamp.strftime('%B %Y')} at {timestamp.strftime('%I:%M %p').lstrip('0')} ({timestamp.tzname()})"
-        print(timestampmessage)
         result = re.sub(pattern, timestampmessage, result)
         result = re.sub(metapattern, str(timestamp), result)
     else:
         pattern = r"\{\{%%" + re.escape(key) + r"%%\}\}"
         result = re.sub(pattern, lambda m, v=value: str(v), result)
 
-print(result)
-
 # Now to actually insert the text content of the blog.
 markdown = mistune.create_markdown()
-
 htmlBlogContent = markdown(blogContent)
 
-print("CONVERSION CONVERTED TEST:\n" + htmlBlogContent)
-print("INSERTING INTO THE FILE:\n")
+print("INSERTING CONTENT INTO THE RESULT...\n")
 
 pattern = r"\{\{%%content%%\}\}"
 result = re.sub(pattern, htmlBlogContent, result)
 
-print(result)
-
+while True:
+    try:
+        with open("./blog/"+resultfilename, "x") as f:
+            f.write(result)
+            print("Wrote to blog/"+resultfilename+" successfully! Exiting..")
+            break
+    except:
+        answer = userinput(f"A file called {resultfilename} already exists. Would you like to overwrite (y/n)?", ["y", "n"])
+        if answer == "y":
+            os.remove("./blog/"+resultfilename)
+        else:
+            print("No changes were written. Exiting..")
+            break
+            
 
 # error checking for snippets still present in the result.
 
