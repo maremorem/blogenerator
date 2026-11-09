@@ -5,17 +5,19 @@ I'm first going to implement this in python, and then once I get more familiar w
 
 ## Usage
 
-Creation and modification dates must be specified in ISO 8601 format so that it can be inserted into the metadescription. For example:
-`2019-11-15T07:35:40+03:00`
+Creation and modification dates must be specified in ISO format. For example:
+`2026-11-20T01:20:00`
+- The timestamp variable is currently set to Sydney Australia. This means that the offset for the current time of year in Sydney will be appended to the above datetime to comply with ISO 8601, which is required for opengraph meta creation info.
 
 Your blog post should contain the following properties:
 title
 description
 created
-lastmod
+lastmod\*
 tags
-cover
+cover (path to an image)
 lang
+
 
 
 **Blogenerator will work like this:**

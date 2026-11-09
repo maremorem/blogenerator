@@ -1,8 +1,10 @@
-import datetime
+from datetime import datetime
+from zoneinfo import ZoneInfo
 import re
 import sys
 from typing import List
 import yaml
+import mistune
 
 
 helpmessage = '''Available commands:
@@ -133,6 +135,17 @@ for key, value in metadata.items():
             else: 
                 result = re.sub(pattern, f"<li>{tag}</li>", result) # for the last tag
                 result = re.sub(metapattern, "<meta property=\"article:tag\" content=\""+tag+"\">", result) # last metatag
+    elif key == "created":
+        timestamp = datetime.fromisoformat(str(value)).replace(tzinfo=ZoneInfo("Australia/Sydney"))
+        print("Timestamp: " + str(timestamp))
+
+        pattern = r"\{\{%%created%%\}\}"
+        metapattern = r"\{\{%%metacreated%%\}\}"
+
+        timestampmessage = f"{timestamp.day} {timestamp.strftime('%B %Y')} at {timestamp.strftime('%I:%M %p').lstrip('0')} ({timestamp.tzname()})"
+        print(timestampmessage)
+        result = re.sub(pattern, timestampmessage, result)
+        result = re.sub(metapattern, str(timestamp), result)
     else:
         pattern = r"\{\{%%" + re.escape(key) + r"%%\}\}"
         result = re.sub(pattern, lambda m, v=value: str(v), result)
@@ -140,6 +153,19 @@ for key, value in metadata.items():
 print(result)
 
 # Now to actually insert the text content of the blog.
-# markdown = mistune.create_markdown()
+markdown = mistune.create_markdown()
 
-# htmlBlogContent = markdown()
+htmlBlogContent = markdown(blogContent)
+
+print("CONVERSION CONVERTED TEST:\n" + htmlBlogContent)
+print("INSERTING INTO THE FILE:\n")
+
+pattern = r"\{\{%%content%%\}\}"
+result = re.sub(pattern, htmlBlogContent, result)
+
+print(result)
+
+
+# error checking for snippets still present in the result.
+
+# ask if you want to delete these lines
