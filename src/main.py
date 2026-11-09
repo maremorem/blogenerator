@@ -99,11 +99,20 @@ if blogfilelist[0] == "---":
         elif i == "---" and count > 0:
             break
         count = count + 1
-        
     # turn it into a dictionary
     metadata = yaml.safe_load(frontmatter)
 else:
     raise RuntimeError("Missing blog metadata")
+
+# Save the body content for later, starting from the line after the last ---
+blogContent = str()
+isFirstRep = True
+for i in range(count + 1, len(blogfilelist)):
+    if isFirstRep:
+        blogContent = blogContent + blogfilelist[i]
+        isFirstRep = False
+    else:
+        blogContent = blogContent +"\n"+ blogfilelist[i]
 
 
 print(f"Metadata: {metadata}")
@@ -129,3 +138,8 @@ for key, value in metadata.items():
         result = re.sub(pattern, lambda m, v=value: str(v), result)
 
 print(result)
+
+# Now to actually insert the text content of the blog.
+# markdown = mistune.create_markdown()
+
+# htmlBlogContent = markdown()
