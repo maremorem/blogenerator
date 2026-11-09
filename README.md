@@ -3,6 +3,20 @@ Welcome to my repo.
 The purpose of this project is to dynamically add blog posts to my static website.
 I'm first going to implement this in python, and then once I get more familiar with rust, I will redo it in rust.
 
+## Usage
+
+Creation and modification dates must be specified in ISO 8601 format so that it can be inserted into the metadescription. For example:
+`2019-11-15T07:35:40+03:00`
+
+Your blog post should contain the following properties:
+title
+description
+created
+lastmod
+tags
+cover
+lang
+
 
 **Blogenerator will work like this:**
 

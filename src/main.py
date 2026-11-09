@@ -1,7 +1,9 @@
+import datetime
 import re
 import sys
 from typing import List
 import yaml
+
 
 helpmessage = '''Available commands:
 help -> shows this message
@@ -106,20 +108,22 @@ else:
 
 print(f"Metadata: {metadata}")
 
-
-# PARSE AND SUBSTITE ALL TEMPLATE THINGIES BASED ON FRONTMATTER ENTRIES
+# PARSE AND SUBSTITE ALL THE METADATA THINGIES BASED ON FRONTMATTER ENTRIES
 result = templatefile
-
 for key, value in metadata.items():
     # print(key, value)
     if key == "tags":
         print(value)
         for tag in value:
             pattern = r"\{\{%%tags%%\}\}"
+            metapattern = r"\{\{%%metatags%%\}\}"
             if tag != value[-1]: 
-                result = re.sub(pattern, "<li>"+tag+"</li>{{%%tags%%}}", result)
+                result = re.sub(pattern, "<li>"+tag+"</li>{{%%tags%%}}", result) # sub into html body
+                result = re.sub(metapattern, "<meta property=\"article:tag\" content=\""+tag+"\">\n    {{%%metatags%%}}", result) # sub into meta tags
+
             else: 
                 result = re.sub(pattern, f"<li>{tag}</li>", result) # for the last tag
+                result = re.sub(metapattern, "<meta property=\"article:tag\" content=\""+tag+"\">", result) # last metatag
     else:
         pattern = r"\{\{%%" + re.escape(key) + r"%%\}\}"
         result = re.sub(pattern, lambda m, v=value: str(v), result)

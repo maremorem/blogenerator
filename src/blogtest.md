@@ -2,7 +2,7 @@
 title: blogtest
 description: "this is a test description"
 created: 5/11/2026
-lastmod: 5/11/2026
+lastmod: 7/11/2026
 tags:
   - uno
   - duo
